@@ -11,6 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*
+Googles web api
+
+/User/
+/User/Register/
+/User/Login/
+/User/Other-users/
+
+Imdbs web api
+
+/Movies/
+/Movies/Movie-lists/
+/Movies/My-movies-list/
+/Movies/Movie-lists/{id}
+/Movies/All-users-lists/{id}
+*/
+
+//Route::get('/user', "UserController@index");
+
+
