@@ -28,6 +28,7 @@ Imdbs web api
 /Movies/All-users-lists/{id}
 */
 
-//Route::get('/user', "UserController@index");
+Route::get("User", "UserListsController@Index");
+Route::get('/{any}', 'MovieListsController@Index')->where('any', '.*');
 
 
