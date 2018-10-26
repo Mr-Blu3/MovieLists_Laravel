@@ -1,24 +1,31 @@
 <template>
     <div>
-        <header v-if="this.pUserInfo">
-            {{this.pUserInfo.w3.ig}}
+        <header v-if="this.pbAuth">
+
+            <p>{{this.$session.get("Name")}}</p>
+            <img :src="this.$session.get('NameImage')">
+            <button v-on:click="_DataAuth">Logga ut</button>
         </header>
     </div>
 </template>
 
 <script>
-    import DataUsers from './Data/Users.data'
 
     export default {
         name: 'Header-component',
-        props: ['pUserInfo'],
+        props: ['pbAuth'],
 
         data () {
             return {
-
+                sbAuth: null
             }
         },
-        methods: {}
+        methods: {
+            _DataAuth(){
+                this.sbAuth = false;
+                this.$emit('done', this.sbAuth);
+            }
+        }
     }
 
 </script>

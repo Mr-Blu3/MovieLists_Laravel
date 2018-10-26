@@ -2,16 +2,16 @@
     <div class="ViewWrap">
 
         <p>
-            <router-link :to="{ name: 'movies' }">Home</router-link> |
-            <router-link :to="{ name: 'user' }">user</router-link>
+            <router-link :to="{ name: 'movies' }">Movies</router-link> |
+            <router-link :to="{ name: 'users' }">Users</router-link>
         </p>
 
         <div class="WrapHeader">
-            <Header-component :pUserInfo="oUserInfo"></Header-component>
+            <Header-component :pbAuth="sbAuth" @done="_Authenticate"></Header-component>
         </div>
 
         <div class="WrapContent">
-            <router-view @done="OnUserLoggedIn"></router-view>
+            <router-view @done="_Authenticate" :pbAuth="sbAuth"></router-view>
         </div>
 
         <div class="WrapFooter">
@@ -27,18 +27,24 @@
 
     export default{
         name: 'Init-component',
+
         data: function() {
             return {
-                oUserInfo: undefined
+                sbAuth: false
             }
         },
+
+        mounted(){
+            //if(!this.sbAuth) this.$router.push('/User')
+        },
+
         components: {
             'Header-component': HeaderComponent,
             'Footer-component': FooterComponent
         },
         methods: {
-            OnUserLoggedIn: function(gUser) {
-                this.oUserInfo = gUser;
+            _Authenticate: function(vsbAuth) {
+                this.sbAuth = vsbAuth;
             }
         }
     }

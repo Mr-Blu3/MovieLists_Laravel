@@ -19,13 +19,7 @@
         name: "GSignInBtn-component",
         mounted(){
             window.gapi.load('auth2', () => {
-
-                const gAuth = AuthGApi._AuthGApi();
-
-                gAuth.attachClickHandler(this.$refs.signinBtn, {}, googleUser => {
-                    this.$emit('done', googleUser);
-                }, error => console.log(error))
-
+                AuthGApi._AuthGApi(this);
             })
         },
         methods: {

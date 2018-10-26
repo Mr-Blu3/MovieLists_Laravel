@@ -1,38 +1,40 @@
 <template>
     <div id="signin-button">
-        {{ message }}
-        {{ OnUserLoggedIn() }}
-        <GSignInBtn-component @done="OnUserLoggedIn"></GSignInBtn-component>
+        <GSignInBtn-component @done="_OnUserLoggedIn"></GSignInBtn-component>
     </div>
 </template>
 
 <script>
+
     import GSignInBtnComponent from "./GsignInBtn"
     import DataUsers from "./../Data/Users.data"
+    import IGoogle from "./../Interfaces/GoogleInterface"
+    import VueSession from 'vue-session'
+    import Vue from 'vue'
+    Vue.use(VueSession)
 
     export default {
+
         name: "LogIn-component",
+        props: ["pbAuth"],
+
         data: function() {
-            return {
-                message: 'Hello'
+            return {}
+        },
+
+        watch: {
+            pbAuth: function (vpbAuth) {
+                console.log(vpbAuth, 'Property changed?')
+                if(!vpbAuth) DataUsers._DestroySession(this);
             }
         },
-        mounted(){},
 
         methods: {
+            _OnUserLoggedIn: function(gUser = IGoogle) {
 
-            OnUserLoggedIn: function(gUser) {
-                //if(User.El) this.$router.push({name: "movies"})
-                this.$emit('done', gUser);
-                return;
-                if(gUser) DataUsers.gUserInfo = gUser;
-
-                let FetchedUser = DataUsers._AuthenticateUser();
-                this._ValidateUser();
-            },
-
-            _ValidateUser(ValidateUser) {
-                // ToDo: Validate user if it is = to gmail login store it
+                if(!gUser) return;
+                DataUsers._SetSession(gUser, this);
+                this.$emit('done', true);
             }
         },
 

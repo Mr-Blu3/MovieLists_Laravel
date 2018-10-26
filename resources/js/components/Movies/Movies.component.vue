@@ -11,7 +11,7 @@
         name: "Movies-component",
         methods: {
             Movies(){
-                this.$router.push({name: "user"})
+                this.$router.push({name: "users"})
                 // ToDo: Validate and check if it requested to data.user
             },
         },

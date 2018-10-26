@@ -3,19 +3,20 @@ import MoviesListComponent from "./components/Movies/Movies.component"
 
 export const routes = [
     {
-        path: '/User',
-        name: 'user',
+        path: '/Users',
+        name: 'users',
         component: LogInComponent,
 
     },
     {
-        path: '/',
-        alias: '/Movies',
+        path: '/Movies',
+        alias: '/',
         name: 'movies',
         meta: {auth: false},
         component: MoviesListComponent
     }
 ]
+
 
 
 
